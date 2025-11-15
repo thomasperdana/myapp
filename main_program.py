@@ -151,7 +151,7 @@ def init_file():
         # Convert the string to a Path object immediately
         INPUT_DIR = Path("/Applications/myapp/input")
         OUTPUT_DIR = Path("/Applications/myapp/output")
-        # Ensure the log directory exists
+        # Ensure the output directory exists
         os.makedirs(OUTPUT_DIR, exist_ok=True)
     
         # Protect input directory as read-only
@@ -926,21 +926,103 @@ def email_v2():
     # --- END EMAIL SENDING LOGIC ---
 
 
-def procedure_12():
-    """Setup monitoring system."""
+def copy_file_v1():
+    """Copies the generated agenda file from the output directory to the input directory."""
+    import shutil
+    import stat
+    global INPUT_DIR, OUTPUT_DIR, LAST_WEEK_DATE, NEXT_WEEK_DATE, NEXT_WEEK_AGENDA_FILE
+    
     logger = logging.getLogger(__name__)
-    logger.info("Procedure 12: Setting up monitoring system")
-    logger.debug("Performance metrics enabled")
-    return {"status": "success", "procedure": "12"}
+    logger.info("Procedure 12: Copying next week's agenda file to input directory (v1)")
+    
+    try:
+        if NEXT_WEEK_AGENDA_FILE is None or not NEXT_WEEK_AGENDA_FILE.exists():
+            logger.error("Next week's agenda file does not exist. Cannot copy.")
+            return {"status": "error", "procedure": "12", "error": "Agenda file not found"}
+            
+        destination_file = INPUT_DIR / NEXT_WEEK_AGENDA_FILE.name
+        
+        # Temporarily change INPUT_DIR permissions to allow writing
+        original_input_dir_permissions = INPUT_DIR.stat().st_mode
+        INPUT_DIR.chmod(0o755) # rwxr-xr-x
+        logger.debug(f"Temporarily changed INPUT_DIR permissions to 755 for writing.")
+
+        # Remove the destination file if it already exists
+        if destination_file.exists():
+            destination_file.unlink()
+            logger.debug(f"Removed existing file in input directory: {destination_file.name}")
+
+        shutil.copy2(str(NEXT_WEEK_AGENDA_FILE), str(destination_file))
+        
+        logger.info(f"Successfully copied {NEXT_WEEK_AGENDA_FILE.name} to {INPUT_DIR}")
+        logger.debug(f"Source: {NEXT_WEEK_AGENDA_FILE}")
+        logger.debug(f"Destination: {destination_file}")
+
+        # Identify and delete the last week file from INPUT_DIR
+        last_week_file_to_delete = INPUT_DIR / "2025-11-08 Saturday Prayer Breakfast Agenda.md"
+        if last_week_file_to_delete.exists():
+            last_week_file_to_delete.unlink()
+            logger.info(f"Successfully deleted old last week file: {last_week_file_to_delete.name}")
+        else:
+            logger.warning(f"Old last week file not found for deletion: {last_week_file_to_delete.name}")
+        
+        # Revert INPUT_DIR permissions back to original (read-only)
+        INPUT_DIR.chmod(original_input_dir_permissions)
+        logger.debug(f"Reverted INPUT_DIR permissions to original: {oct(original_input_dir_permissions)}")
+        
+        return {"status": "success", "procedure": "12"}
+        
+    except Exception as e:
+        logger.error(f"Failed to copy agenda file: {str(e)}", exc_info=True)
+        # Attempt to revert permissions even if copy failed
+        try:
+            INPUT_DIR.chmod(original_input_dir_permissions)
+            logger.debug(f"Attempted to revert INPUT_DIR permissions to original after error: {oct(original_input_dir_permissions)}")
+        except Exception as revert_e:
+            logger.error(f"Failed to revert INPUT_DIR permissions after error: {revert_e}")
+        return {"status": "error", "procedure": "12", "error": str(e)}
 
 
-def procedure_13():
-    """Load plugins and extensions."""
+def move_file_v2():
+    """Moves the generated agenda file from the output directory to a temp directory and makes the temp directory read-only."""
+    import shutil
+    import stat
+    global INPUT_DIR, OUTPUT_DIR, LAST_WEEK_DATE, NEXT_WEEK_DATE, NEXT_WEEK_AGENDA_FILE
+    
     logger = logging.getLogger(__name__)
-    logger.info("Procedure 13: Loading plugins and extensions")
-    logger.debug("Plugin directory scanned")
-    return {"status": "success", "procedure": "13"}
+    logger.info("Procedure 13: Moving next week's agenda file to temp directory and making it read-only")
+    
+    try:
+        TEMP_DIR = Path("/Applications/myapp/temp")
+        os.makedirs(TEMP_DIR, exist_ok=True)
+        logger.debug(f"Ensured temp directory exists: {TEMP_DIR}")
 
+        if NEXT_WEEK_AGENDA_FILE is None or not NEXT_WEEK_AGENDA_FILE.exists():
+            logger.error("Next week's agenda file does not exist. Cannot move.")
+            return {"status": "error", "procedure": "13", "error": "Agenda file not found"}
+            
+        destination_file = TEMP_DIR / NEXT_WEEK_AGENDA_FILE.name
+        
+        # Remove the destination file if it already exists
+        if destination_file.exists():
+            destination_file.unlink()
+            logger.debug(f"Removed existing file in temp directory: {destination_file.name}")
+
+        shutil.move(str(NEXT_WEEK_AGENDA_FILE), str(destination_file))
+        
+        logger.info(f"Successfully moved {NEXT_WEEK_AGENDA_FILE.name} to {TEMP_DIR}")
+        logger.debug(f"Source: {NEXT_WEEK_AGENDA_FILE}")
+        logger.debug(f"Destination: {destination_file}")
+        
+        # Make the temp directory read-only
+        TEMP_DIR.chmod(0o555)
+        logger.info(f"Made temp directory read-only: {TEMP_DIR}")
+        
+        return {"status": "success", "procedure": "13"}
+        
+    except Exception as e:
+        logger.error(f"Failed to move agenda file to temp directory: {str(e)}", exc_info=True)
+        return {"status": "error", "procedure": "13", "error": str(e)}
 
 def procedure_14():
     """Initialize session management."""
@@ -1031,8 +1113,8 @@ def main():
     
     procedures = [
         init_file, bible_reading, prayer_card, international_reading, state_reading,
-        widow_prayer, pastor_prayer, print_v1_6x, kjv_verses, print_v2_1x,
-        email_v2, procedure_12, procedure_13, procedure_14, procedure_15,
+        widow_prayer, pastor_prayer, print_v1_6x, copy_file_v1, kjv_verses, print_v2_1x,
+        email_v2, move_file_v2, procedure_14, procedure_15,
         procedure_16, procedure_17, procedure_18, procedure_19, procedure_20
     ]
     

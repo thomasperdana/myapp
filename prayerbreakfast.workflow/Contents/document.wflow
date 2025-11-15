@@ -63,7 +63,7 @@
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
-					<integer>1</integer>
+					<integer>0</integer>
 					<key>shell</key>
 					<string>/bin/zsh</string>
 					<key>source</key>
@@ -84,7 +84,7 @@
 				<key>Class Name</key>
 				<string>RunShellScriptAction</string>
 				<key>InputUUID</key>
-				<string>4A407B06-2CE1-4787-B84D-C9D14AF6F4F4</string>
+				<string>3F95FB1F-50E2-468C-8BB0-E1B1E8AD9335</string>
 				<key>Keywords</key>
 				<array>
 					<string>Shell</string>
@@ -94,9 +94,9 @@
 					<string>Unix</string>
 				</array>
 				<key>OutputUUID</key>
-				<string>F1E153E0-1400-407E-A934-8FA0140A7750</string>
+				<string>B44B6938-F60B-442A-A39A-851334B83F9A</string>
 				<key>UUID</key>
-				<string>1C4F9B78-4771-454F-AFC8-028D94DFEBA3</string>
+				<string>2814CB53-E555-4D1E-82AE-55A6D6919E42</string>
 				<key>UnlocalizedApplications</key>
 				<array>
 					<string>Automator</string>
