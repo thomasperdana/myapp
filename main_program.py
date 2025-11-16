@@ -162,12 +162,17 @@ def init_file():
         logger.info("Protected input directory and files as read-only (555)")
         logger.debug("Set permissions to r-xr-xr-x for input directory")
         
-        last_week_file = INPUT_DIR / "2025-11-08 Saturday Prayer Breakfast Agenda.md"
+        today = datetime.now().date()
+        days_since_last_saturday = (today.weekday() - 5) % 7  # Saturday=5, returns 0 if today is Saturday
+        last_week_date = today - timedelta(days=days_since_last_saturday)
+        next_week_date = last_week_date + timedelta(weeks=1)
         
-        LAST_WEEK_DATE = datetime.strptime("2025-11-08", "%Y-%m-%d")
-        NEXT_WEEK_DATE = LAST_WEEK_DATE + timedelta(weeks=1)
+        LAST_WEEK_DATE = datetime.combine(last_week_date, datetime.min.time())
+        NEXT_WEEK_DATE = datetime.combine(next_week_date, datetime.min.time())
         next_week_str = NEXT_WEEK_DATE.strftime("%Y-%m-%d")
         last_week_str = LAST_WEEK_DATE.strftime("%Y-%m-%d")
+        
+        last_week_file = INPUT_DIR / f"{last_week_str} Saturday Prayer Breakfast Agenda.md"
         
         logger.info(f"Last week date: {last_week_str}")
         logger.info(f"Next week date: {next_week_str}")
@@ -447,38 +452,7 @@ def state_reading():
         # Remove the closing "---" if present
         day_content = re.sub(r'\n---\s*$', '', day_content)
         
-        # Reformat the content to match the exact format required
-        # Extract the main heading (### line)
-        heading_match = re.search(r'###\s+(.+)', day_content)
-        if not heading_match:
-            logger.error("Could not find heading in Day content")
-            return {"status": "error", "procedure": "05", "error": "Heading not found"}
-        
-        heading = heading_match.group(1).strip()
-        
-        # Extract scripture reference (first occurrence)
-        scripture_match = re.search(r'\*([^*]+)\*', day_content)
-        scripture = scripture_match.group(0) if scripture_match else ""
-        
-        # Extract everything after the scripture reference
-        if scripture_match:
-            after_scripture_pos = scripture_match.end()
-            after_scripture = day_content[after_scripture_pos:].strip()
-        else:
-            after_scripture = ""
-        
-        # Build formatted output
-        formatted_lines = [heading]
-        
-        if after_scripture:
-            # Clean up - remove excess blank lines but keep single newlines
-            after_scripture = re.sub(r'\n\s*\n+', '\n', after_scripture)
-            formatted_lines.append(after_scripture)
-        
-        if scripture:
-            formatted_lines.append(scripture)
-        
-        new_state_reading = f"State Reading by Alvin Beverly\n" + "\n".join(formatted_lines)
+        new_state_reading = f"State Reading by Alvin Beverly\n{day_content}"
         
         logger.info(f"Found State Reading for Day {day_number}")
         logger.debug(f"Formatted content:\n{new_state_reading}")
@@ -996,6 +970,10 @@ def move_file_v2():
         TEMP_DIR = Path("/Applications/myapp/temp")
         os.makedirs(TEMP_DIR, exist_ok=True)
         logger.debug(f"Ensured temp directory exists: {TEMP_DIR}")
+
+        # Ensure temp directory is writable before moving files
+        TEMP_DIR.chmod(0o755)
+        logger.debug(f"Set temp directory permissions to writable (755): {TEMP_DIR}")
 
         if NEXT_WEEK_AGENDA_FILE is None or not NEXT_WEEK_AGENDA_FILE.exists():
             logger.error("Next week's agenda file does not exist. Cannot move.")
