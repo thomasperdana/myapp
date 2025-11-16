@@ -933,7 +933,8 @@ def copy_file_v1():
         logger.debug(f"Destination: {destination_file}")
 
         # Identify and delete the last week file from INPUT_DIR
-        last_week_file_to_delete = INPUT_DIR / "2025-11-08 Saturday Prayer Breakfast Agenda.md"
+        last_week_filename = f"{LAST_WEEK_DATE.strftime('%Y-%m-%d')} Saturday Prayer Breakfast Agenda.md"
+        last_week_file_to_delete = INPUT_DIR / last_week_filename
         if last_week_file_to_delete.exists():
             last_week_file_to_delete.unlink()
             logger.info(f"Successfully deleted old last week file: {last_week_file_to_delete.name}")

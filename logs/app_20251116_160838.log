@@ -1,0 +1,244 @@
+2025-11-16 16:08:38 - root - INFO - [main_program.py:1089] - ============================================================
+2025-11-16 16:08:38 - root - INFO - [main_program.py:1090] - Application Starting
+2025-11-16 16:08:38 - root - INFO - [main_program.py:1091] - ============================================================
+2025-11-16 16:08:38 - root - DEBUG - [main_program.py:1106] - Executing procedure 1 of 20
+2025-11-16 16:08:38 - __main__ - INFO - [main_program.py:146] - Procedure 01: Initializing application configuration
+2025-11-16 16:08:38 - __main__ - DEBUG - [main_program.py:147] - Loading default configuration values
+2025-11-16 16:08:38 - __main__ - INFO - [main_program.py:162] - Protected input directory and files as read-only (555)
+2025-11-16 16:08:38 - __main__ - DEBUG - [main_program.py:163] - Set permissions to r-xr-xr-x for input directory
+2025-11-16 16:08:38 - __main__ - INFO - [main_program.py:177] - Last week date: 2025-11-15
+2025-11-16 16:08:38 - __main__ - INFO - [main_program.py:178] - Next week date: 2025-11-22
+2025-11-16 16:08:38 - __main__ - INFO - [main_program.py:189] - Created next week agenda: 2025-11-22 Saturday Prayer Breakfast Agenda.md
+2025-11-16 16:08:38 - __main__ - DEBUG - [main_program.py:190] - Copied from /Applications/myapp/input/2025-11-15 Saturday Prayer Breakfast Agenda.md to /Applications/myapp/output/2025-11-22 Saturday Prayer Breakfast Agenda.md
+2025-11-16 16:08:38 - __main__ - INFO - [main_program.py:194] - Changed file permissions to 777 (rwxrwxrwx)
+2025-11-16 16:08:38 - __main__ - DEBUG - [main_program.py:195] - File permissions updated for 2025-11-22 Saturday Prayer Breakfast Agenda.md
+2025-11-16 16:08:38 - __main__ - INFO - [main_program.py:205] - Updated title from 'North Seminole County Gideons - 2025-11-15 Saturday Prayer Breakfast Agenda' to 'North Seminole County Gideons - 2025-11-22 Saturday Prayer Breakfast Agenda'
+2025-11-16 16:08:38 - __main__ - DEBUG - [main_program.py:206] - File content updated successfully
+2025-11-16 16:08:38 - root - DEBUG - [main_program.py:1112] - Procedure 1 completed successfully
+2025-11-16 16:08:38 - root - DEBUG - [main_program.py:1106] - Executing procedure 2 of 20
+2025-11-16 16:08:38 - __main__ - INFO - [main_program.py:223] - Procedure 02: Updating Bible Reading Rotation
+2025-11-16 16:08:38 - __main__ - DEBUG - [main_program.py:224] - Reading Bible rotation schedule from hq2.md
+2025-11-16 16:08:38 - __main__ - DEBUG - [main_program.py:239] - Looking for reading for NOVEMBER 22
+2025-11-16 16:08:38 - __main__ - INFO - [main_program.py:260] - Found Bible reading for NOVEMBER 22: James 4
+2025-11-16 16:08:38 - __main__ - INFO - [main_program.py:272] - Updated Bible Reading Rotation to: James 4
+2025-11-16 16:08:38 - __main__ - DEBUG - [main_program.py:273] - Bible reading rotation updated successfully
+2025-11-16 16:08:38 - root - DEBUG - [main_program.py:1112] - Procedure 2 completed successfully
+2025-11-16 16:08:38 - root - DEBUG - [main_program.py:1106] - Executing procedure 3 of 20
+2025-11-16 16:08:38 - __main__ - INFO - [main_program.py:288] - Procedure 03: Updating Prayer Card rotation
+2025-11-16 16:08:38 - __main__ - DEBUG - [main_program.py:289] - Reading Prayer Card schedule from prayer.md
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:314] - Current prayer card page: 38, next page: 39
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:339] - Next prayer card: Prayer Card Together - Page 39 III—WORKING: 5. John 9:4
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:346] - Updated Prayer Card from Page 38 to Page 39
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:347] - Prayer card rotation updated successfully
+2025-11-16 16:08:39 - root - DEBUG - [main_program.py:1112] - Procedure 3 completed successfully
+2025-11-16 16:08:39 - root - DEBUG - [main_program.py:1106] - Executing procedure 4 of 20
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:362] - Procedure 04: Updating International Reading
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:363] - Reading International schedule from hq1.md
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:377] - Looking for DAY 22
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:389] - Found International Reading for DAY 22
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:390] - Content length: 831 characters
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:406] - Updated International Reading to DAY 22
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:407] - International reading updated successfully
+2025-11-16 16:08:39 - root - DEBUG - [main_program.py:1112] - Procedure 4 completed successfully
+2025-11-16 16:08:39 - root - DEBUG - [main_program.py:1106] - Executing procedure 5 of 20
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:425] - Procedure 05: Updating State Reading
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:426] - Reading State schedule from fl.md
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:440] - Looking for Day 22
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:457] - Found State Reading for Day 22
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:458] - Formatted content:
+State Reading by Alvin Beverly
+### Church Ministry
+- Churches and pastors and their families
+- More church presentations and qualified speakers
+
+### Faith Fund
+- July Pre-International Convention Faith Fund rallies
+- Birthday Parties for Jesus
+- Countdown 100 (Goal: $138,000)
+- Auxiliary HEART Program (Goal: $42,000)
+- Auxiliary Events (Goal: $11,000)
+
+### GideonCard
+- Opportunities to share the GideonCard video
+- More GideonCard presentations
+- GideonCard displays in all approved locations
+
+### Membership
+- Annual Membership Dinners
+- Church Opportunity Events
+- Gideon Opportunity Events
+
+### Scripture Distribution
+- Open doors to place God's Word
+
+**Camps:** St. Petersburg East, St. Petersburg West, Tarpon Springs
+
+---
+
+## Pray for special needs...
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:472] - Updated State Reading to Day 22
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:473] - State reading updated successfully
+2025-11-16 16:08:39 - root - DEBUG - [main_program.py:1112] - Procedure 5 completed successfully
+2025-11-16 16:08:39 - root - DEBUG - [main_program.py:1106] - Executing procedure 6 of 20
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:491] - Procedure 06: Updating Widow Prayer
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:492] - Reading Widow schedule from widow.md
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:506] - Looking for section 22
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:545] - Found Widow Prayer for section 22: Southwest Region – SW11
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:546] - Formatted content:
+Pray for the Widows by Donald Tise - 22. Southwest Region – SW11
+Tampa Northdale - Naomi Ryan, B.B. Schweitzer, Anne-Lise Snow, 
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:559] - Updated Widow Prayer to section 22
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:560] - Widow prayer updated successfully
+2025-11-16 16:08:39 - root - DEBUG - [main_program.py:1112] - Procedure 6 completed successfully
+2025-11-16 16:08:39 - root - DEBUG - [main_program.py:1106] - Executing procedure 7 of 20
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:578] - Procedure 07: Handling Pastor Prayer
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:613] - Found 79 pastor entries.
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:626] - Current pastor prayer entry: Pray for Local Pastor by Johnny Perry - New Tribes Mission Homes Chapel or Ethnos 360 - Chaplain Daniel Royer
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:637] - Next pastor prayer entry: Pray for Local Pastor by Johnny Perry - New Zion Primitive Baptist Church - Elder William Brand
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:642] - Pastor prayer entry updated successfully.
+2025-11-16 16:08:39 - root - DEBUG - [main_program.py:1112] - Procedure 7 completed successfully
+2025-11-16 16:08:39 - root - DEBUG - [main_program.py:1106] - Executing procedure 8 of 20
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:657] - Procedure 08: Printing NEXT_WEEK_AGENDA_FILE six times
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:667] - Printing /Applications/myapp/output/2025-11-22 Saturday Prayer Breakfast Agenda.md (iteration 1/6)
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:677] - Print command output (iteration 1): request id is HP_Officejet_4620_series-365 (1 file(s))
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:667] - Printing /Applications/myapp/output/2025-11-22 Saturday Prayer Breakfast Agenda.md (iteration 2/6)
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:677] - Print command output (iteration 2): request id is HP_Officejet_4620_series-366 (1 file(s))
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:667] - Printing /Applications/myapp/output/2025-11-22 Saturday Prayer Breakfast Agenda.md (iteration 3/6)
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:677] - Print command output (iteration 3): request id is HP_Officejet_4620_series-367 (1 file(s))
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:667] - Printing /Applications/myapp/output/2025-11-22 Saturday Prayer Breakfast Agenda.md (iteration 4/6)
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:677] - Print command output (iteration 4): request id is HP_Officejet_4620_series-368 (1 file(s))
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:667] - Printing /Applications/myapp/output/2025-11-22 Saturday Prayer Breakfast Agenda.md (iteration 5/6)
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:677] - Print command output (iteration 5): request id is HP_Officejet_4620_series-369 (1 file(s))
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:667] - Printing /Applications/myapp/output/2025-11-22 Saturday Prayer Breakfast Agenda.md (iteration 6/6)
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:677] - Print command output (iteration 6): request id is HP_Officejet_4620_series-370 (1 file(s))
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:679] - NEXT_WEEK_AGENDA_FILE printed six times successfully.
+2025-11-16 16:08:39 - root - DEBUG - [main_program.py:1112] - Procedure 8 completed successfully
+2025-11-16 16:08:39 - root - DEBUG - [main_program.py:1106] - Executing procedure 9 of 20
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:910] - Procedure 12: Copying next week's agenda file to input directory (v1)
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:922] - Temporarily changed INPUT_DIR permissions to 755 for writing.
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:931] - Successfully copied 2025-11-22 Saturday Prayer Breakfast Agenda.md to /Applications/myapp/input
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:932] - Source: /Applications/myapp/output/2025-11-22 Saturday Prayer Breakfast Agenda.md
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:933] - Destination: /Applications/myapp/input/2025-11-22 Saturday Prayer Breakfast Agenda.md
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:940] - Successfully deleted old last week file: 2025-11-15 Saturday Prayer Breakfast Agenda.md
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:946] - Reverted INPUT_DIR permissions to original: 0o40555
+2025-11-16 16:08:39 - root - DEBUG - [main_program.py:1112] - Procedure 9 completed successfully
+2025-11-16 16:08:39 - root - DEBUG - [main_program.py:1106] - Executing procedure 10 of 20
+2025-11-16 16:08:39 - __main__ - INFO - [main_program.py:694] - Procedure 09: Handling KJV Verses
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:753] - Line being processed: North Seminole County Gideons - 2025-11-22 Saturday Prayer Breakfast Agenda
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:753] - Line being processed: 
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:753] - Line being processed: Order Breakfast, Offering time, Opening Prayer by TaeWoo Lee
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:753] - Line being processed: 
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:753] - Line being processed: Bible Reading Rotation - James 4
+2025-11-16 16:08:39 - __main__ - DEBUG - [main_program.py:772] - Found Bible reference: James 4
+2025-11-16 16:08:39 - urllib3.connectionpool - DEBUG - [connectionpool.py:1049] - Starting new HTTPS connection (1): bible-api.com:443
+2025-11-16 16:08:40 - urllib3.connectionpool - DEBUG - [connectionpool.py:544] - https://bible-api.com:443 "GET /James%204?translation=kjv HTTP/1.1" 200 None
+2025-11-16 16:08:40 - __main__ - INFO - [main_program.py:778] - Inserted KJV verses for James 4
+2025-11-16 16:08:40 - __main__ - DEBUG - [main_program.py:753] - Line being processed: 
+2025-11-16 16:08:40 - __main__ - DEBUG - [main_program.py:753] - Line being processed: Prayer Card Together - Page 39 III—WORKING: 5. John 9:4
+2025-11-16 16:08:40 - __main__ - DEBUG - [main_program.py:772] - Found Bible reference: John 9:4
+2025-11-16 16:08:40 - urllib3.connectionpool - DEBUG - [connectionpool.py:1049] - Starting new HTTPS connection (1): bible-api.com:443
+2025-11-16 16:08:40 - urllib3.connectionpool - DEBUG - [connectionpool.py:544] - https://bible-api.com:443 "GET /John%209%3A4?translation=kjv HTTP/1.1" 200 414
+2025-11-16 16:08:40 - __main__ - INFO - [main_program.py:778] - Inserted KJV verses for John 9:4
+2025-11-16 16:08:40 - __main__ - DEBUG - [main_program.py:753] - Line being processed: 
+2025-11-16 16:08:40 - __main__ - DEBUG - [main_program.py:753] - Line being processed: International Reading by TaeWoo Lee
+2025-11-16 16:08:40 - __main__ - DEBUG - [main_program.py:753] - Line being processed: One Vision—Striving Side by Side through the Association of Members for Service. For members to meet at weekly prayer meetings, monthly camp meetings, camp activities, and other ministry opportunities to encourage each other and handle the work of the ministry. For members to engage with one another, creating a platform for transparency and accountability and helping each other deal with the temptations and trials of today. For the effective application of basic business skills for the success of the ministry worldwide. For members to enlist others to join and work together to reach more people for Jesus Christ. Gideons and Auxiliary from Bahrain, Central African Republic, Chad, Egypt, Ethiopia, Gambia, Jordan, and Kuwait. St. Helena*. The salvation of souls from personal witnessing and Scriptures distributed. ACTS 4:12
+2025-11-16 16:08:40 - __main__ - DEBUG - [main_program.py:772] - Found Bible reference: ACTS 4:12
+2025-11-16 16:08:40 - urllib3.connectionpool - DEBUG - [connectionpool.py:1049] - Starting new HTTPS connection (1): bible-api.com:443
+2025-11-16 16:08:41 - urllib3.connectionpool - DEBUG - [connectionpool.py:544] - https://bible-api.com:443 "GET /ACTS%204%3A12?translation=kjv HTTP/1.1" 200 468
+2025-11-16 16:08:41 - __main__ - INFO - [main_program.py:778] - Inserted KJV verses for ACTS 4:12
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: 
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: State Reading by Alvin Beverly
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: ### Church Ministry
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: - Churches and pastors and their families
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: - More church presentations and qualified speakers
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: 
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: ### Faith Fund
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: - July Pre-International Convention Faith Fund rallies
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: - Birthday Parties for Jesus
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: - Countdown 100 (Goal: $138,000)
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: - Auxiliary HEART Program (Goal: $42,000)
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: - Auxiliary Events (Goal: $11,000)
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: 
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: ### GideonCard
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: - Opportunities to share the GideonCard video
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: - More GideonCard presentations
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: - GideonCard displays in all approved locations
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: 
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: ### Membership
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: - Annual Membership Dinners
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: - Church Opportunity Events
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: - Gideon Opportunity Events
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: 
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: ### Scripture Distribution
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: - Open doors to place God's Word
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: 
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: **Camps:** St. Petersburg East, St. Petersburg West, Tarpon Springs
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: 
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: ---
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: 
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: ## Pray for special needs...
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: 
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: Pray for the Widows by Donald Tise - 22. Southwest Region – SW11
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: Tampa Northdale - Naomi Ryan, B.B. Schweitzer, Anne-Lise Snow, 
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: 
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: Pray for Local Pastor by Johnny Perry - New Zion Primitive Baptist Church - Elder William Brand
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: 
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:753] - Line being processed: Prayer Request, Prayer Rotation, Closing Prayer by TaeWoo Lee, Food and Fellowship
+2025-11-16 16:08:41 - __main__ - INFO - [main_program.py:785] - KJV verses processed and agenda updated successfully.
+2025-11-16 16:08:41 - root - DEBUG - [main_program.py:1112] - Procedure 10 completed successfully
+2025-11-16 16:08:41 - root - DEBUG - [main_program.py:1106] - Executing procedure 11 of 20
+2025-11-16 16:08:41 - __main__ - INFO - [main_program.py:800] - Procedure 10: Printing NEXT_WEEK_AGENDA_FILE to default printer
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:809] - Printing /Applications/myapp/output/2025-11-22 Saturday Prayer Breakfast Agenda.md to default printer
+2025-11-16 16:08:41 - __main__ - DEBUG - [main_program.py:818] - Print command output: request id is HP_Officejet_4620_series-371 (1 file(s))
+2025-11-16 16:08:41 - __main__ - INFO - [main_program.py:820] - NEXT_WEEK_AGENDA_FILE printed successfully.
+2025-11-16 16:08:41 - root - DEBUG - [main_program.py:1112] - Procedure 11 completed successfully
+2025-11-16 16:08:41 - root - DEBUG - [main_program.py:1106] - Executing procedure 12 of 20
+2025-11-16 16:08:41 - __main__ - INFO - [main_program.py:850] - Preparing to send email from ThomasPerdana@gmail.com to gideon.northseminole@gmail.com with subject: Prayer Breakfast Agenda
+2025-11-16 16:08:41 - __main__ - INFO - [main_program.py:875] - Attached file: 2025-11-22 Saturday Prayer Breakfast Agenda.md
+2025-11-16 16:08:43 - __main__ - INFO - [main_program.py:895] - Email sent successfully.
+2025-11-16 16:08:43 - root - DEBUG - [main_program.py:1112] - Procedure 12 completed successfully
+2025-11-16 16:08:43 - root - DEBUG - [main_program.py:1106] - Executing procedure 13 of 20
+2025-11-16 16:08:43 - __main__ - INFO - [main_program.py:968] - Procedure 13: Moving next week's agenda file to temp directory and making it read-only
+2025-11-16 16:08:43 - __main__ - DEBUG - [main_program.py:973] - Ensured temp directory exists: /Applications/myapp/temp
+2025-11-16 16:08:43 - __main__ - DEBUG - [main_program.py:977] - Set temp directory permissions to writable (755): /Applications/myapp/temp
+2025-11-16 16:08:43 - __main__ - INFO - [main_program.py:992] - Successfully moved 2025-11-22 Saturday Prayer Breakfast Agenda.md to /Applications/myapp/temp
+2025-11-16 16:08:43 - __main__ - DEBUG - [main_program.py:993] - Source: /Applications/myapp/output/2025-11-22 Saturday Prayer Breakfast Agenda.md
+2025-11-16 16:08:43 - __main__ - DEBUG - [main_program.py:994] - Destination: /Applications/myapp/temp/2025-11-22 Saturday Prayer Breakfast Agenda.md
+2025-11-16 16:08:43 - __main__ - INFO - [main_program.py:998] - Made temp directory read-only: /Applications/myapp/temp
+2025-11-16 16:08:43 - root - DEBUG - [main_program.py:1112] - Procedure 13 completed successfully
+2025-11-16 16:08:43 - root - DEBUG - [main_program.py:1106] - Executing procedure 14 of 20
+2025-11-16 16:08:43 - __main__ - INFO - [main_program.py:1009] - Procedure 14: Initializing session management
+2025-11-16 16:08:43 - __main__ - DEBUG - [main_program.py:1010] - Session storage configured
+2025-11-16 16:08:43 - root - DEBUG - [main_program.py:1112] - Procedure 14 completed successfully
+2025-11-16 16:08:43 - root - DEBUG - [main_program.py:1106] - Executing procedure 15 of 20
+2025-11-16 16:08:43 - __main__ - INFO - [main_program.py:1017] - Procedure 15: Setting up error handling
+2025-11-16 16:08:43 - __main__ - DEBUG - [main_program.py:1018] - Global exception handler registered
+2025-11-16 16:08:43 - root - DEBUG - [main_program.py:1112] - Procedure 15 completed successfully
+2025-11-16 16:08:43 - root - DEBUG - [main_program.py:1106] - Executing procedure 16 of 20
+2025-11-16 16:08:43 - __main__ - INFO - [main_program.py:1025] - Procedure 16: Loading resource files
+2025-11-16 16:08:43 - __main__ - DEBUG - [main_program.py:1026] - Static resources indexed
+2025-11-16 16:08:43 - root - DEBUG - [main_program.py:1112] - Procedure 16 completed successfully
+2025-11-16 16:08:43 - root - DEBUG - [main_program.py:1106] - Executing procedure 17 of 20
+2025-11-16 16:08:43 - __main__ - INFO - [main_program.py:1033] - Procedure 17: Initializing data validation
+2025-11-16 16:08:43 - __main__ - DEBUG - [main_program.py:1034] - Validation rules compiled
+2025-11-16 16:08:43 - root - DEBUG - [main_program.py:1112] - Procedure 17 completed successfully
+2025-11-16 16:08:43 - root - DEBUG - [main_program.py:1106] - Executing procedure 18 of 20
+2025-11-16 16:08:43 - __main__ - INFO - [main_program.py:1041] - Procedure 18: Setting up backup system
+2025-11-16 16:08:43 - __main__ - DEBUG - [main_program.py:1042] - Backup schedule configured
+2025-11-16 16:08:43 - root - DEBUG - [main_program.py:1112] - Procedure 18 completed successfully
+2025-11-16 16:08:43 - root - DEBUG - [main_program.py:1106] - Executing procedure 19 of 20
+2025-11-16 16:08:43 - __main__ - INFO - [main_program.py:1049] - Procedure 19: Initializing analytics
+2025-11-16 16:08:43 - __main__ - DEBUG - [main_program.py:1050] - Analytics endpoints ready
+2025-11-16 16:08:43 - root - DEBUG - [main_program.py:1112] - Procedure 19 completed successfully
+2025-11-16 16:08:43 - root - DEBUG - [main_program.py:1106] - Executing procedure 20 of 20
+2025-11-16 16:08:43 - __main__ - INFO - [main_program.py:1057] - Procedure 20: Finalizing startup sequence
+2025-11-16 16:08:43 - __main__ - DEBUG - [main_program.py:1058] - All systems operational
+2025-11-16 16:08:43 - root - DEBUG - [main_program.py:1112] - Procedure 20 completed successfully
+2025-11-16 16:08:43 - root - INFO - [main_program.py:1122] - ============================================================
+2025-11-16 16:08:43 - root - INFO - [main_program.py:1123] - Execution Summary
+2025-11-16 16:08:43 - root - INFO - [main_program.py:1124] - ============================================================
+2025-11-16 16:08:43 - root - INFO - [main_program.py:1125] - Total Procedures: 20
+2025-11-16 16:08:43 - root - INFO - [main_program.py:1126] - Successful: 20
+2025-11-16 16:08:43 - root - INFO - [main_program.py:1127] - Failed: 0
+2025-11-16 16:08:43 - root - INFO - [main_program.py:1128] - ============================================================
+2025-11-16 16:08:43 - root - INFO - [main_program.py:1131] - Application started successfully!
