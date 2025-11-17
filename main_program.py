@@ -9,6 +9,7 @@ qE7!sP9*bK2@zX4#
 conda activate base
 pyinstaller --onefile main_program.py
 code-insiders .
+pytest -q
 """
 
 import logging
@@ -38,6 +39,7 @@ LAST_WEEK_DATE = None
 NEXT_WEEK_DATE = None
 NEXT_WEEK_AGENDA_FILE = None
 NEXT_WEEK_AGENDA_FILE_DOCX = None
+APP_BASE_DIR = Path("/Applications/myapp")
 
 # List of all Bible book names for precise regex matching
 BIBLE_BOOK_NAMES = [
@@ -77,9 +79,15 @@ def get_kjv_verse(reference):
         verses = []
         if 'verses' in data:
             for verse_data in data['verses']:
-                verses.append(verse_data['text'].strip())
+                verses.append({
+                    "verse": verse_data.get("verse"),
+                    "text": verse_data.get("text", "").strip()
+                })
         elif 'text' in data: # For single verse responses that might not be in 'verses' array
-            verses.append(data['text'].strip())
+            verses.append({
+                "verse": data.get("verse_start") or data.get("verse"),
+                "text": data['text'].strip()
+            })
             
         return verses
         
@@ -99,7 +107,7 @@ def setup_logging():
 
     from pathlib import Path  # Ensure this import exists
     # Convert the string to a Path object immediately
-    log_dir = Path("/Applications/myapp/logs") 
+    log_dir = APP_BASE_DIR / "logs"
     # Ensure the log directory exists
     os.makedirs(log_dir, exist_ok=True)
 
@@ -150,8 +158,8 @@ def init_file():
     try:
         from pathlib import Path  # Ensure this import exists
         # Convert the string to a Path object immediately
-        INPUT_DIR = Path("/Applications/myapp/input")
-        OUTPUT_DIR = Path("/Applications/myapp/output")
+        INPUT_DIR = APP_BASE_DIR / "input"
+        OUTPUT_DIR = APP_BASE_DIR / "output"
         # Ensure the output directory exists
         os.makedirs(OUTPUT_DIR, exist_ok=True)
     
@@ -778,10 +786,14 @@ def kjv_verses():
                 
                 logger.debug(f"Found Bible reference: {reference}")
                 verses = get_kjv_verse(reference)
+                start_verse_num = int(start_verse) if start_verse and start_verse.isdigit() else None
                 
                 if verses:
-                    for i, verse_text in enumerate(verses):
-                        updated_lines.append(f"{i+1}. {verse_text}")
+                    for i, verse_info in enumerate(verses):
+                        verse_number = verse_info.get("verse")
+                        if verse_number is None:
+                            verse_number = start_verse_num + i if start_verse_num is not None else i + 1
+                        updated_lines.append(f"{verse_number}. {verse_info.get('text', '').strip()}")
                     logger.info(f"Inserted KJV verses for {reference}")
                 else:
                     logger.warning(f"Could not retrieve KJV verses for {reference}")
@@ -979,7 +991,7 @@ def move_file_v2():
     logger.info("Procedure 13: Moving next week's agenda files to temp directory and making it read-only")
     
     try:
-        TEMP_DIR = Path("/Applications/myapp/temp")
+        TEMP_DIR = APP_BASE_DIR / "temp"
         os.makedirs(TEMP_DIR, exist_ok=True)
         logger.debug(f"Ensured temp directory exists: {TEMP_DIR}")
 
