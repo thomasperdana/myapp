@@ -892,7 +892,7 @@ def email_v2():
         return {"status": "error", "procedure": "11", "error": f"Error attaching file: {e}"}
 
     # Add body to email
-    body = "Please find the attached Prayer Breakfast Agenda.\n\nRegards,\nYour Application"
+    body = "Please find the attached Prayer Breakfast Agenda.\n"
     msg.attach(MIMEText(body, 'plain'))
 
     # --- EMAIL SENDING LOGIC ---
@@ -970,13 +970,13 @@ def copy_file_v1():
 
 
 def move_file_v2():
-    """Moves the generated agenda file from the output directory to a temp directory and makes the temp directory read-only."""
+    """Moves the generated agenda files from the output directory to a temp directory and makes the temp directory read-only."""
     import shutil
     import stat
-    global INPUT_DIR, OUTPUT_DIR, LAST_WEEK_DATE, NEXT_WEEK_DATE, NEXT_WEEK_AGENDA_FILE
+    global INPUT_DIR, OUTPUT_DIR, LAST_WEEK_DATE, NEXT_WEEK_DATE, NEXT_WEEK_AGENDA_FILE, NEXT_WEEK_AGENDA_FILE_DOCX
     
     logger = logging.getLogger(__name__)
-    logger.info("Procedure 13: Moving next week's agenda file to temp directory and making it read-only")
+    logger.info("Procedure 13: Moving next week's agenda files to temp directory and making it read-only")
     
     try:
         TEMP_DIR = Path("/Applications/myapp/temp")
@@ -987,22 +987,33 @@ def move_file_v2():
         TEMP_DIR.chmod(0o755)
         logger.debug(f"Set temp directory permissions to writable (755): {TEMP_DIR}")
 
-        if NEXT_WEEK_AGENDA_FILE is None or not NEXT_WEEK_AGENDA_FILE.exists():
-            logger.error("Next week's agenda file does not exist. Cannot move.")
-            return {"status": "error", "procedure": "13", "error": "Agenda file not found"}
+        files_to_move = [
+            ("NEXT_WEEK_AGENDA_FILE", NEXT_WEEK_AGENDA_FILE),
+            ("NEXT_WEEK_AGENDA_FILE_DOCX", NEXT_WEEK_AGENDA_FILE_DOCX),
+        ]
+        
+        for label, agenda_path in files_to_move:
+            if agenda_path is None or not agenda_path.exists():
+                logger.error(f"{label} does not exist. Cannot move files to temp directory.")
+                return {"status": "error", "procedure": "13", "error": f"{label} not found"}
             
-        destination_file = TEMP_DIR / NEXT_WEEK_AGENDA_FILE.name
-        
-        # Remove the destination file if it already exists
-        if destination_file.exists():
-            destination_file.unlink()
-            logger.debug(f"Removed existing file in temp directory: {destination_file.name}")
+            destination_file = TEMP_DIR / agenda_path.name
+            
+            # Remove the destination file if it already exists
+            if destination_file.exists():
+                destination_file.unlink()
+                logger.debug(f"Removed existing file in temp directory: {destination_file.name}")
 
-        shutil.move(str(NEXT_WEEK_AGENDA_FILE), str(destination_file))
-        
-        logger.info(f"Successfully moved {NEXT_WEEK_AGENDA_FILE.name} to {TEMP_DIR}")
-        logger.debug(f"Source: {NEXT_WEEK_AGENDA_FILE}")
-        logger.debug(f"Destination: {destination_file}")
+            shutil.move(str(agenda_path), str(destination_file))
+            
+            if label == "NEXT_WEEK_AGENDA_FILE":
+                NEXT_WEEK_AGENDA_FILE = destination_file
+            else:
+                NEXT_WEEK_AGENDA_FILE_DOCX = destination_file
+            
+            logger.info(f"Successfully moved {agenda_path.name} to {TEMP_DIR}")
+            logger.debug(f"Source: {agenda_path}")
+            logger.debug(f"Destination: {destination_file}")
         
         # Make the temp directory read-only
         TEMP_DIR.chmod(0o555)
