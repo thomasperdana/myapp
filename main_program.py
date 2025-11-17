@@ -37,6 +37,7 @@ OUTPUT_DIR = None
 LAST_WEEK_DATE = None
 NEXT_WEEK_DATE = None
 NEXT_WEEK_AGENDA_FILE = None
+NEXT_WEEK_AGENDA_FILE_DOCX = None
 
 # List of all Bible book names for precise regex matching
 BIBLE_BOOK_NAMES = [
@@ -140,7 +141,7 @@ def init_file():
     import shutil
     import stat
      
-    global INPUT_DIR, OUTPUT_DIR, LAST_WEEK_DATE, NEXT_WEEK_DATE, NEXT_WEEK_AGENDA_FILE
+    global INPUT_DIR, OUTPUT_DIR, LAST_WEEK_DATE, NEXT_WEEK_DATE, NEXT_WEEK_AGENDA_FILE, NEXT_WEEK_AGENDA_FILE_DOCX
 
     logger = logging.getLogger(__name__)
     logger.info("Procedure 01: Initializing application configuration")
@@ -178,12 +179,18 @@ def init_file():
         logger.info(f"Next week date: {next_week_str}")
         
         NEXT_WEEK_AGENDA_FILE = OUTPUT_DIR / f"{next_week_str} Saturday Prayer Breakfast Agenda.md"
+        NEXT_WEEK_AGENDA_FILE_DOCX = OUTPUT_DIR / f"{next_week_str} Saturday Prayer Breakfast Agenda.docx"
         
         # Remove existing file if it exists
         if NEXT_WEEK_AGENDA_FILE.exists():
             NEXT_WEEK_AGENDA_FILE.chmod(0o777)
             NEXT_WEEK_AGENDA_FILE.unlink()
             logger.debug(f"Removed existing file: {NEXT_WEEK_AGENDA_FILE.name}")
+        
+        if NEXT_WEEK_AGENDA_FILE_DOCX.exists():
+            NEXT_WEEK_AGENDA_FILE_DOCX.chmod(0o777)
+            NEXT_WEEK_AGENDA_FILE_DOCX.unlink()
+            logger.debug(f"Removed existing file: {NEXT_WEEK_AGENDA_FILE_DOCX.name}")
         
         shutil.copy2(last_week_file, NEXT_WEEK_AGENDA_FILE)
         logger.info(f"Created next week agenda: {NEXT_WEEK_AGENDA_FILE.name}")
@@ -834,12 +841,12 @@ def email_v2():
     from email.mime.base import MIMEBase
     from email import encoders
     import os
-    global INPUT_DIR, OUTPUT_DIR, LAST_WEEK_DATE, NEXT_WEEK_DATE, NEXT_WEEK_AGENDA_FILE
+    global INPUT_DIR, OUTPUT_DIR, LAST_WEEK_DATE, NEXT_WEEK_DATE, NEXT_WEEK_AGENDA_FILE, NEXT_WEEK_AGENDA_FILE_DOCX
     
     logger = logging.getLogger(__name__)
     # User provided details
     EMAIL_FROM = "ThomasPerdana@gmail.com"
-    EMAIL_TO = "gideon.northseminole@gmail.com"
+    EMAIL_TO = ["gideon.northseminole@gmail.com", "taewoo1@verizon.net"]
     SUBJECT = "Prayer Breakfast Agenda"
     EMAIL_PASSWORD = "ktnd vioj bxxu aika" # User's Gmail App Password
     
@@ -849,16 +856,20 @@ def email_v2():
     
     logger.info(f"Preparing to send email from {EMAIL_FROM} to {EMAIL_TO} with subject: {SUBJECT}")
 
-    if NEXT_WEEK_AGENDA_FILE is None:
-        logger.error("NEXT_WEEK_AGENDA_FILE is not set. Run init_file first.")
-        return {"status": "error", "procedure": "11", "error": "NEXT_WEEK_AGENDA_FILE not set"}
+    if NEXT_WEEK_AGENDA_FILE_DOCX is None:
+        logger.error("NEXT_WEEK_AGENDA_FILE_DOCX is not set. Run init_file first.")
+        return {"status": "error", "procedure": "11", "error": "NEXT_WEEK_AGENDA_FILE_DOCX not set"}
+    
+    if not NEXT_WEEK_AGENDA_FILE_DOCX.exists():
+        logger.error("NEXT_WEEK_AGENDA_FILE_DOCX does not exist. Run convert_file first.")
+        return {"status": "error", "procedure": "11", "error": "NEXT_WEEK_AGENDA_FILE_DOCX missing"}
 
-    attachment_path = NEXT_WEEK_AGENDA_FILE.resolve()
+    attachment_path = NEXT_WEEK_AGENDA_FILE_DOCX.resolve()
     
     # Create a multipart message
     msg = MIMEMultipart()
     msg['From'] = EMAIL_FROM
-    msg['To'] = EMAIL_TO
+    msg['To'] = ", ".join(EMAIL_TO)
     msg['Subject'] = SUBJECT
 
     # Attach the file
@@ -1003,12 +1014,68 @@ def move_file_v2():
         logger.error(f"Failed to move agenda file to temp directory: {str(e)}", exc_info=True)
         return {"status": "error", "procedure": "13", "error": str(e)}
 
-def procedure_14():
-    """Initialize session management."""
+def convert_file():
+    """Convert the Markdown agenda into a DOCX document."""
+    global NEXT_WEEK_AGENDA_FILE, NEXT_WEEK_AGENDA_FILE_DOCX
     logger = logging.getLogger(__name__)
-    logger.info("Procedure 14: Initializing session management")
-    logger.debug("Session storage configured")
-    return {"status": "success", "procedure": "14"}
+    logger.info("Procedure 14: Converting NEXT_WEEK_AGENDA_FILE to DOCX")
+    
+    if NEXT_WEEK_AGENDA_FILE is None:
+        logger.error("NEXT_WEEK_AGENDA_FILE is not set. Run init_file first.")
+        return {"status": "error", "procedure": "14", "error": "NEXT_WEEK_AGENDA_FILE not set"}
+    
+    if NEXT_WEEK_AGENDA_FILE_DOCX is None:
+        logger.error("NEXT_WEEK_AGENDA_FILE_DOCX path is not set. Run init_file first.")
+        return {"status": "error", "procedure": "14", "error": "NEXT_WEEK_AGENDA_FILE_DOCX not set"}
+    
+    try:
+        from docx import Document
+    except ImportError:
+        logger.error("python-docx is not installed. Unable to create DOCX file.")
+        return {"status": "error", "procedure": "14", "error": "Missing dependency: python-docx"}
+    
+    try:
+        markdown_text = NEXT_WEEK_AGENDA_FILE.read_text()
+        document = Document()
+        
+        for raw_line in markdown_text.splitlines():
+            line = raw_line.rstrip()
+            stripped = line.strip()
+            
+            if not stripped:
+                document.add_paragraph("")
+                continue
+            
+            if stripped.startswith("#"):
+                level = len(stripped) - len(stripped.lstrip("#"))
+                heading_text = stripped[level:].strip() or stripped
+                document.add_heading(heading_text, level=min(level, 4))
+                continue
+            
+            if stripped.startswith(("-", "*")):
+                bullet_text = stripped.lstrip("-*").strip()
+                document.add_paragraph(bullet_text, style="List Bullet")
+                continue
+            
+            ordered_match = re.match(r"^(\d+)[\.\)]\s+(.*)", stripped)
+            if ordered_match:
+                document.add_paragraph(ordered_match.group(2), style="List Number")
+                continue
+            
+            if stripped.startswith(">"):
+                document.add_paragraph(stripped.lstrip(">").strip(), style="Intense Quote")
+                continue
+            
+            document.add_paragraph(line)
+        
+        document.save(str(NEXT_WEEK_AGENDA_FILE_DOCX))
+        NEXT_WEEK_AGENDA_FILE_DOCX.chmod(0o777)
+        logger.info(f"Agenda converted to DOCX: {NEXT_WEEK_AGENDA_FILE_DOCX}")
+        return {"status": "success", "procedure": "14", "output": str(NEXT_WEEK_AGENDA_FILE_DOCX)}
+    
+    except Exception as e:
+        logger.error(f"Failed to convert Markdown to DOCX: {str(e)}", exc_info=True)
+        return {"status": "error", "procedure": "14", "error": str(e)}
 
 
 def procedure_15():
@@ -1093,7 +1160,7 @@ def main():
     procedures = [
         init_file, bible_reading, prayer_card, international_reading, state_reading,
         widow_prayer, pastor_prayer, print_v1_6x, copy_file_v1, kjv_verses, print_v2_1x,
-        email_v2, move_file_v2, procedure_14, procedure_15,
+        convert_file, email_v2, move_file_v2, procedure_15,
         procedure_16, procedure_17, procedure_18, procedure_19, procedure_20
     ]
     
